@@ -1,5 +1,5 @@
 <% include common/header.ejs %>
-<% include common/cart.ejs %>
+<%- include('common/cart.ejs', (typeof cartOptions === 'undefined' ? {} : cartOptions)) %>
 
 <div id="main" class="container-fluid">
     <div class="row" id="pizza_filters">

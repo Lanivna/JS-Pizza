@@ -17,5 +17,10 @@
     <div class="text">
         Загальна сума: <span class="total total-sum">0</span> грн
     </div>
-    <button class="btn btn-warning"><a href="index.html">Замовити</a></button>
+    <% var pageId = $('body').data('page-id'); %>
+    <% if(pageId == 'mainPage') { %>
+    <a href="/order.html" class="btn btn-warning">Замовити</a>
+    <% } else if(pageId == 'orderPage') { %>
+    <a href="/index.html" class="btn btn-info">Редагувати</a>
+    <% } %>
 </div>

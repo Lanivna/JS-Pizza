@@ -17,6 +17,7 @@ var CartTotal = {
     sum: 0,
     items: 0,
 };
+var CartOptions = {};
 
 function saveCart(){
     console.log('saveCart()');
@@ -86,10 +87,15 @@ function removeFromCart(cart_item) {
     updateCart();
 }
 
-function initialiseCart() {
+function initialiseCart(options) {
     //Фукнція віпрацьвуватиме при завантаженні сторінки
     //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
-    //TODO: ...
+    // options = options || {};
+    var _defaults = {
+        // editable: true,
+        editable: !$cart.hasClass('cart-const'),
+    };
+    Object.assign(CartOptions, _defaults, options || {});
 
     loadCart();
 
@@ -123,7 +129,9 @@ function updateCart() {
 
     //Онволення однієї піци
     function showOnePizzaInCart(cart_item) {
-        var html_code = Templates.PizzaCart_OneItem(cart_item);
+        var html_code = Templates.PizzaCart_OneItem(Object.assign({}, cart_item, {
+            editable: CartOptions.editable,
+        }));
 
         var $node = $(html_code);
 

@@ -3,7 +3,8 @@
  */
 var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
-var Pizza_List = require('../Pizza_List');
+// var Pizza_List = require('../Pizza_List');
+var Pizza_List = [];
 var Pizza_Filters = require('../Pizza_Filters');
 
 //HTML едемент куди будуть додаватися піци
@@ -62,9 +63,19 @@ function showFilters(filters) {
 }
 
 function initialiseMenu() {
+    $.ajax('/api/get-pizza-list/', {
+        dataType: 'json',
+        success: function(json){
+            Pizza_List = json;
+            showPizzaList(json);
+            showFilters(Pizza_Filters);
+        },
+    });
+
+
     //Показуємо усі піци
-    showPizzaList(Pizza_List);
-    showFilters(Pizza_Filters);
+    // showPizzaList(Pizza_List);
+    // showFilters(Pizza_Filters);
 }
 
 exports.filterPizza = filterPizza;

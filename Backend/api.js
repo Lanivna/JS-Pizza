@@ -4,6 +4,7 @@
 var Pizza_List = require('./data/Pizza_List');
 
 exports.getPizzaList = function(req, res) {
+    var Pizza_List = require('./data/Pizza_List');
     res.send(Pizza_List);
 };
 

@@ -6,7 +6,7 @@ var pizza_info = [
     {
         id:1,
         icon:'assets/images/pizza_7.jpg',
-        title: "Імпреза",
+        title: "Імпреза VIP",
         type: 'М’ясна піца',
         content: {
             meat: ['балик', 'салямі'],
@@ -32,7 +32,7 @@ var pizza_info = [
     {
         id:2,
         icon:'assets/images/pizza_2.jpg',
-        title: "BBQ",
+        title: "BBQ Texas",
         type: 'М’ясна піца',
         content: {
             meat: ['мисливські ковбаски', 'ковбаски папероні', 'шинка'],
@@ -99,7 +99,7 @@ var pizza_info = [
     {
         id:17,
         icon:'assets/images/pizza_3.jpg',
-        title: "Маргарита",
+        title: "Маргарита Vega",
         type: 'Вега піца',
         content: {
             cheese: ['сир моцарелла', 'сир домашній'],

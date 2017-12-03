@@ -9,10 +9,16 @@ function sizeString(size){
     <div class="pizza-cart-info">
         <div class="pizza-cart-price">Ціна: <%= pizza[size].price %> грн</div>
     </div>
+    <% if(editable) { %>
     <div class="pizza-cart-count">
         <button class="btn btn-danger minus">-</button>
         <span class="label label-default pizza-cart-quantity"><%= quantity %></span>
         <button class="btn btn-success plus">+</button>
         <button class="btn btn-info delete">x</button>
     </div>
+    <% } else { %>
+    <div class="pizza-cart-count pizza-cart-const">
+        <span class="label label-default pizza-cart-quantity"><%= quantity %></span>
+    </div>
+    <% } %>
 </div>
