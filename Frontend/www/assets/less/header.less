@@ -6,15 +6,11 @@
   z-index: @zIndexHeader;
 }
 
-
 .top-panel {
-  //background: green; // TODO: remove
   background: rgba(0,0,0,.8);
   z-index: 10;
   right: @cartWidth;
   position: fixed;
-
-
 
   .top-discount {
     top: 90px;
@@ -61,6 +57,8 @@
 
   .pizza-logo {
     color: #fff!important;
+    background-image: url("JS-Pizza/Frontend/www/assets/images/discount.jpg");
+    background-color: #a3a0a0;
 
     .title-2 {
       font-size: 25px;
@@ -70,14 +68,15 @@
   .site-icon {
     position: fixed;
     top: 0;
+    left: 6px;
     background: #ea862e;
     z-index: 99;
     width: 100px;
     height: 90px;
     font-size: 19px;
-    padding: 10px;
     padding-top: 15px;
     color: #fff;
+
   }
 
 }
@@ -98,3 +97,4 @@
   float: right;
   margin-top: -11px;
 }
+
