@@ -1,21 +1,22 @@
-#cart{
+#cart {
   background: #fffff5;
   position: fixed;
+  margin-top: 60px;
   right: 0;
   top: 0;
   bottom: 0;
   width: @cartWidth;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  @cartHeaderHeight: 100px;
+  border-left: 1px solid rgba(0, 0, 0, .1);
+}
 
-    @cartHeaderHeight: 100px;
     .order {
-      padding-top: 15px;
-      padding-bottom: 13px;
-      font-weight: 700;
-      padding-left: 15px;
-      padding-right: 0px;
       background-color: #ffffff;
-      //display: inline-block;
-      height: @cartHeaderHeight;
+      height: 70px;
+      border-left: 1px solid rgba(0, 0, 0, .1);
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
 
       .orange-circle {
         color: white;
@@ -31,24 +32,115 @@
       }
 
       .order-title {
-        font-size: 20px;
-        line-height: 17px;
+        font-size: 23px;
+        font-weight: 700;
+        line-height: 13px;
+        padding-left: 15px;
+        padding-top: 20px;
       }
-    }
 
-  @cartFooterHeight: 100px;
-  padding-bottom: @cartFooterHeight;
+      .clean-order-title{
+        float: right;
+        cursor: pointer;
+      }
+
   .cart-footer {
-    height: @cartFooterHeight;
+    height: 100px;
     background: #fff;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    border-top: 1px solid rgba(0, 0, 0, .1);
   }
 
   .cart-items {
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-bottom: 1px solid rgba(0,0,0,.1);
   }
+
+  .pizza-cart-card{
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+  }
+
+  .text{
+    line-height: 14px;
+    font-size: 18px;
+    color: #ec890e;
+  }
+
+
+.pizza-cart-quantity {
+  background-color: transparent;
+  display: inline-block;
+  color: black;
+  border-radius: 5px;
+  position: relative;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  font-size: 13px;
+}
+
+.plus {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  color: white;
+  font-weight: 800;
+  background: #44b940;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  font-size: 13px;
+}
+
+.minus {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  color: white;
+  font-weight: 800;
+  background: #8a0e12;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  font-size: 13px;
+}
+
+
+.delete {
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  color: white;
+  font-weight: 800;
+  background: #207dd0;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  font-size: 13px;
+}
+
+.pizza-cart-title{
+  font-size: 16px;
+  line-height: 18px;
+  color: #ec890e;
+}
+
+.pizza-cart-price{
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+.pizza-cart-price.plus.minus.delete.pizza-cart-quantity {
+  display: inline-block;
+  position: relative;
 }
