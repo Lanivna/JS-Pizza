@@ -189,7 +189,7 @@ exports.PizzaMenu_OneItem = ejs.compile("<%\r\n\r\nfunction getIngredientsArray(
 exports.PizzaCart_OneItem = ejs.compile("<div>\r\n    <%= pizza.title %> (<%= size %>)\r\n    <div>Ціна: <%= pizza[size].price %> грн.</div>\r\n    <div>\r\n        <button class=\"btn btn-danger minus\">-</button>\r\n        <span class=\"label label-default\"><%= quantity %></span>\r\n        <button class=\"btn btn-success plus\">+</button>\r\n    </div>\r\n</div>");
 
 exports.header = ejs.compile("<div class=\"navbar navbar-fixed-top top-panel\">\r\n    <div class=\"site-icon\">\r\n        <div class=\"discount-before top-discount\">\r\n        </div>\r\n        <a class=\"pizza-logo\" href=\"/index.html\">\r\n            <div id=\"pizza-title2\" class=\"title-1\">\r\n                Pizza\r\n            </div>\r\n            <div class=\"title-2\">\r\n                KMA\r\n            </div>\r\n        </a>\r\n    </div>\r\n    <div class=\"header-top-row\">\r\n        <div class=\"main-header-top-items\">\r\n            <div class=\"main-header-top-item phone-number visible-xs-inline-block visible-sm-inline-block visible-lg-inline-block visible-md-inline-block\">\r\n                (044) 222 5 222\r\n            </div>\r\n            <div class=\"main-header-top-item work-days visible-lg-inline-block visible-md-inline-block\">\r\n                24 години/ 7 днів на тиждень\r\n            </div>\r\n            <div class=\"main-header-top-item delivery visible-lg-inline-block\">\r\n                Безкоштовна доставка піци\r\n            </div>\r\n            <div type=\"button\" class=\"main-header-top-item btn btn-warning sign-in-button\">\r\n                Ввійти\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"header-down-row\">\r\n        <span class=\" pizza-page\" style=\"color:white;\">\r\n            <a href=\"/index.html\" style=\"color:white;\" class=\"hidden-xs\">Піца</a> &nbsp;\r\n        </span>\r\n\r\n    </div>\r\n\r\n</div>");
-exports.footer = ejs.compile("<footer class=\"footer\">\r\n    <p>Pizza.22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>\r\n    <p>\r\n        Доставка піци не здійснюється\r\n    </p>\r\n</footer>");
+exports.footer = ejs.compile("    <p>Pizza.22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>\r\n    <p>\r\n        Доставка піци не здійснюється\r\n    </p>\r\n");
 
 },{"ejs":7}],3:[function(require,module,exports){
 /**
@@ -217,7 +217,7 @@ $(function(){
         header: '#header',
         footer: '#footer',
     });
-    
+
 
 });
 },{"./Pizza_List":1,"./Templates":2,"./pizza/PizzaCart":4,"./pizza/PizzaMenu":5}],4:[function(require,module,exports){
@@ -247,14 +247,29 @@ function addToCart(pizza, size) {
         size: size,
         quantity: 1
     });
+    //
+    // (function AddToCart(pizza, size){
+    //     var  = require('./Templates');
+    //     for(var key in tpls){
+    //         var selector = tpls[key];
+    //         var $node = $(selector);
+    //         var _html = (Templates[key])({});
+    //         $node.html(_html);
+    //     }
+    // })
 
     //Оновити вміст кошика на сторінці
     updateCart();
 }
 
-function removeFromCart(cart_item) {
+function removeFromCart(pizza, size) {
     //Видалити піцу з кошика
     //TODO: треба зробити
+    Cart.remove({
+        pizza: pizza,
+        size: size,
+        quantity: 1
+        });
 
     //Після видалення оновити відображення
     updateCart();

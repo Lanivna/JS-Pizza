@@ -1,0 +1,101 @@
+#header {
+  position: fixed;
+  right: @cartWidth;
+  left: 0;
+  top: 0;
+  z-index: @zIndexHeader;
+}
+
+//@media (max-width: 800px) //TODO: how to add?
+
+.top-panel {
+  //background: green; // TODO: remove
+  background: rgba(0,0,0,.8);
+  z-index: 10;
+  right: @cartWidth;
+  position: fixed;
+
+
+
+  .top-discount {
+    top: 90px;
+    transform: scaleY(-1);
+  }
+
+  .header-top-row {
+    width: 100%;
+    font-size: 12px;
+    line-height: 11px;
+    margin: 0;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid;
+    color: #a1a1a1;
+
+    .phone-number {
+      width: 100%;
+      font-size: 14px;
+      padding: 0px;
+    }
+
+    .work-days {
+      font-size: 12px;
+      padding-right: 30px;
+    }
+
+    .delivery {
+      font-size: 16px;
+      padding-right: 30px;
+    }
+
+    .main-header-top-items {
+      display: block!important;
+    }
+  }
+
+  .header-down-row {
+    display: block!important;
+    padding-bottom: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .pizza-logo {
+    color: #fff!important;
+
+    .title-2 {
+      font-size: 25px;
+    }
+  }
+
+  .site-icon {
+    position: fixed;
+    top: 0;
+    background: #ea862e;
+    z-index: 99;
+    width: 100px;
+    height: 90px;
+    font-size: 19px;
+    padding: 10px;
+    padding-top: 15px;
+    color: #fff;
+  }
+
+}
+
+.site-icon {
+  position: fixed;
+  top: 0px;
+  z-index: 99;
+  width: 100px;
+  height: 90px;
+  font-size: 19px;
+  color: rgb(255, 255, 255);
+  background: rgb(234, 134, 46);
+  padding: 15px 10px 10px;
+}
+
+.sign-in-button {
+  float: right;
+  margin-top: -11px;
+}
