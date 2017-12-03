@@ -1,9 +1,27 @@
-<div>
-    <%= pizza.title %> (<%= size %>)
-    <div>Ціна: <%= pizza[size].price %> грн.</div>
-    <div>
+<!--<div>-->
+    <!--<%= pizza.title %> (<%= size %>)-->
+    <!--<div>Ціна: <%= pizza[size].price %> грн.</div>-->
+    <!--<div>-->
+        <!--<button class="btn btn-danger minus">-</button>-->
+        <!--<span class="label label-default"><%= quantity %></span>-->
+        <!--<button class="btn btn-success plus">+</button>-->
+    <!--</div>-->
+<!--</div>-->
+<%
+function sizeString(size){
+    return size == 'big_size' ? 'Велика' : (size == 'small_size' ? 'Маленька' : null);
+}
+%>
+<div class="col-xs-12 pizza-cart-card">
+    <img src="<%= pizza.icon %>" alt="<%= pizza.title %>" class="pizza-cart-img">
+    <span class="pizza-cart-title"><%= pizza.title %> (<%= sizeString(size) %>)</span>
+    <div class="pizza-cart-info">
+        <div class="pizza-cart-price">Ціна: <%= pizza[size].price %> грн</div>
+    </div>
+    <div class="pizza-cart-count">
         <button class="btn btn-danger minus">-</button>
-        <span class="label label-default"><%= quantity %></span>
+        <span class="label label-default pizza-cart-quantity"><%= quantity %></span>
         <button class="btn btn-success plus">+</button>
+        <button class="btn btn-info delete">x</button>
     </div>
 </div>
