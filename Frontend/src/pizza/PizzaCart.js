@@ -2,6 +2,7 @@
  * Created by chaika on 02.02.16.
  */
 var Templates = require('../Templates');
+var basil	=	new (require('basil.js'))();
 
 //Перелік розмірів піци
 var PizzaSize = {
@@ -16,6 +17,23 @@ var CartTotal = {
     sum: 0,
     items: 0,
 };
+
+function saveCart(){
+    console.log('saveCart()');
+    console.log(Cart);
+    basil.set('cart', Cart);
+    console.log(basil.get('cart'));
+}
+function loadCart(){
+    //TODO: validate loaded
+    console.log('loadCart()');
+    console.log(basil.get('cart'));
+    Cart = basil.get('cart') || [];
+    console.log(Cart);
+    // updateTotals();
+    updateCart();
+    return Cart;
+}
 
 //HTML едемент куди будуть додаватися піци
 var $cart = $("#cart");
@@ -72,7 +90,8 @@ function initialiseCart() {
     //Фукнція віпрацьвуватиме при завантаженні сторінки
     //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
     //TODO: ...
-    console.log('removeFromCart');
+
+    loadCart();
 
     updateCart();
 }
@@ -141,6 +160,13 @@ function updateCart() {
     // Cart.forEach(showOnePizzaInCart);
     Cart.forEach(processPizzaInCart);
     updateTotals();
+    if(CartTotal.quantity > 0){
+        $cart.find('.cart-empty').hide();
+    } else {
+        $cart.find('.cart-empty').show();
+    }
+
+    saveCart();
 
 }
 

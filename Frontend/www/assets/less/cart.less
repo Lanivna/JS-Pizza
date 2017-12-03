@@ -1,30 +1,55 @@
 #cart{
+  background: gray; // TODO:
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: @cartWidth;
 
-.order {
-  padding-top: 15px;
-  padding-bottom: 13px;
-  font-weight: 700;
-  padding-left: 15px;
-  padding-right: 0px;
-  background-color: #ffffff;
-  display: inline-block;
+    @cartHeaderHeight: 100px;
+    //padding-top: @cartHeaderHeight;
+    .order {
+      padding-top: 15px;
+      padding-bottom: 13px;
+      font-weight: 700;
+      padding-left: 15px;
+      padding-right: 0px;
+      background-color: #ffffff;
+      //display: inline-block;
+      height: @cartHeaderHeight;
 
-  .orange-circle {
-    color: white;
-    display: inline-block;
-    border-radius: 50%;
-    background: #F2711C;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    padding: 5px;
-    box-sizing: border-box;
-    font-size: 10px;
+      .orange-circle {
+        color: white;
+        display: inline-block;
+        border-radius: 50%;
+        background: #F2711C;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        padding: 5px;
+        box-sizing: border-box;
+        font-size: 10px;
+      }
+
+      .order-title {
+        font-size: 20px;
+        line-height: 17px;
+      }
+    }
+
+  @cartFooterHeight: 100px;
+  padding-bottom: @cartFooterHeight;
+  .cart-footer {
+    height: @cartFooterHeight;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 
-  .order-title {
-    font-size: 20px;
-    line-height: 17px;
+  .cart-items {
+    overflow-x: hidden;
+    overflow-y: auto;
   }
-}
 }
