@@ -22,8 +22,10 @@ $(function(){
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
     // var Pizza_List = require('./Pizza_List');
+    var OrderForm = require('./OrderForm');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
+    OrderForm.init();
 
 });

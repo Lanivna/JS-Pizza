@@ -1,4 +1,106 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var $form = $('#order-form');
+var $btn = $('#order-btn');
+var $map = $('#order-map');
+
+var Fields = [
+    {
+        name: 'phone',
+        validator: function(value){
+            return /^\+?[0-9]{3}-?[0-9]{6,12}$/.test(value);
+        },
+        errorMessage: 'Invalid phone number!',
+    },
+    {
+        name: 'name',
+        validator: function(value){
+            return value.length >= 4 && value.length <= 36;
+        },
+        errorMessage: 'Ім\'я має бути від 4 до 36 символів!',
+    },
+    {
+        name: 'addr',
+        validator: function(value){
+            return true;
+        },
+        errorMessage: 'Неправильна адреса!',
+    },
+];
+var FormValid = false;
+var $fields = {};
+
+function initFields(){
+    //TODO: ...
+    // Fields = fields;
+    Fields.forEach(function(field){
+        var $node = $('[name="' + field.name + '"]');
+        $fields[field.name] = $node;
+        $node.on('change blur', function(){
+            doValidate(field);
+        });
+    });
+}
+
+function doValidate(field_info){
+    // var $node = $('[name="' + field_info.name + '"]');
+    var $node = $fields[field_info.name];
+    var _isValid = (!field_info.validator || field_info.validator($node.val()));
+    showValidness($node, _isValid, field_info.errorMessage);
+    FormValid = FormValid && _isValid;
+    return _isValid;
+}
+
+function showValidness($node, isValid, message){
+    var $group = $node.closest('.form-group');
+    var $help = $group.find('.help-block');
+    if(isValid){
+        $group.removeClass('has-error').addClass('has-success');
+        $help.text('').slideUp();
+    } else {
+        $group.removeClass('has-success').addClass('has-error');
+        if(message){
+            $help.text(message).slideDown();
+        } else {
+            $help.text('').slideUp();
+        }
+    }
+    return $node;
+}
+
+function onSubmit(){
+    //TODO: validate
+    // var _data = $form.serialize();
+    FormValid = true;
+    Fields.forEach(doValidate);
+
+    if(FormValid){
+        $.ajax({
+            url: $form.attr('action'),
+            data: $form.serialize(),
+            method: $form.attr('method'),
+            // error: function(x, y, z){},
+            success: function(response){
+                console.log(response);
+            },
+        });
+    } else {
+        //TODO: ...
+    }
+}
+
+function initForm(){
+    initFields();
+
+    $btn.click(function(){
+        onSubmit();
+    });
+}
+
+module.exports = {
+    init: initForm,
+};
+
+},{}],2:[function(require,module,exports){
 var filters = [
      {
         key: "all",
@@ -53,7 +155,7 @@ var filters = [
 
 module.exports = filters;
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -70,7 +172,7 @@ exports.footer = ejs.compile("<div class=\"discount-panel\">\r\n    <div class=\
 exports.cart = ejs.compile("<div id=\"cart-head\" class=\"order\">\r\n    <span class=\"order-title\"> Замовлення </span>\r\n    <span class=\"orange-circle total total-items\">0</span>\r\n    <span class=\"clean-order-title cart-clear\"> Очистити замовлення </span>\r\n</div>\r\n<div id=\"cart-empty\" class=\"cart-empty\">\r\n    <div class=\"text\">\r\n        Пусто в холодильнику? <br>\r\n        Замовте піцу!\r\n    </div>\r\n</div>\r\n<div id=\"cart-items\" class=\"cart-items\"></div>\r\n<div id=\"cart-summary\" class=\"cart-footer\">\r\n    <div class=\"text\">\r\n        Кількість товарів: <span class=\"total total-quantity\">0</span>\r\n    </div>\r\n    <div class=\"text\">\r\n        Загальна сума: <span class=\"total total-sum\">0</span> грн\r\n    </div>\r\n    <% var pageId = $('body').data('page-id'); %>\r\n    <% if(pageId == 'mainPage') { %>\r\n    <a href=\"/order.html\" class=\"btn btn-warning\">Замовити</a>\r\n    <% } else if(pageId == 'orderPage') { %>\r\n    <a href=\"/index.html\" class=\"btn btn-info\">Редагувати</a>\r\n    <% } %>\r\n</div>\r\n");
 exports.filters = ejs.compile("<ul class=\"nav nav-pills\">\r\n    <% filters.forEach(function(filter){ %>\r\n        <li><a data-toggle=\"pill\" href=\"#filter-<%= filter.key %>\"><%= filter.title %></a></li>\r\n    <% }); %>\r\n</ul>");
 
-},{"ejs":8}],3:[function(require,module,exports){
+},{"ejs":9}],4:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -95,12 +197,14 @@ $(function(){
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
     // var Pizza_List = require('./Pizza_List');
+    var OrderForm = require('./OrderForm');
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
+    OrderForm.init();
 
 });
-},{"./Templates":2,"./pizza/PizzaCart":4,"./pizza/PizzaMenu":5}],4:[function(require,module,exports){
+},{"./OrderForm":1,"./Templates":3,"./pizza/PizzaCart":5,"./pizza/PizzaMenu":6}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -288,7 +392,7 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
-},{"../Templates":2,"basil.js":6}],5:[function(require,module,exports){
+},{"../Templates":3,"basil.js":7}],6:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -372,7 +476,7 @@ function initialiseMenu() {
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
-},{"../Pizza_Filters":1,"../Templates":2,"./PizzaCart":4}],6:[function(require,module,exports){
+},{"../Pizza_Filters":2,"../Templates":3,"./PizzaCart":5}],7:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -760,9 +864,9 @@ exports.initialiseMenu = initialiseMenu;
 
 })();
 
-},{}],7:[function(require,module,exports){
-
 },{}],8:[function(require,module,exports){
+
+},{}],9:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1630,7 +1734,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":10,"./utils":9,"fs":7,"path":11}],9:[function(require,module,exports){
+},{"../package.json":11,"./utils":10,"fs":8,"path":12}],10:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1796,7 +1900,7 @@ exports.cache = {
   }
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports={
   "_from": "ejs@^2.4.1",
   "_id": "ejs@2.5.7",
@@ -1877,7 +1981,7 @@ module.exports={
   "version": "2.5.7"
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2105,7 +2209,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":12}],12:[function(require,module,exports){
+},{"_process":13}],13:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2291,4 +2395,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[3]);
+},{}]},{},[4]);
