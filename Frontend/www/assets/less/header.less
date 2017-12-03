@@ -1,13 +1,13 @@
 #header {
   position: fixed;
-  right: @cartWidth;
+  //right: @cartWidth;
   left: 0;
   top: 0;
   z-index: @zIndexHeader;
 }
 
 .top-panel {
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, .8);
   z-index: 10;
   right: @cartWidth;
   position: fixed;
@@ -17,52 +17,13 @@
     transform: scaleY(-1);
   }
 
-  .header-top-row {
-    width: 100%;
-    font-size: 12px;
-    line-height: 11px;
-    margin: 0;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid;
-    color: #a1a1a1;
-
-    .phone-number {
-      width: 100%;
-      font-size: 14px;
-      padding: 0px;
-    }
-
-    .work-days {
-      font-size: 12px;
-      padding-right: 30px;
-    }
-
-    .delivery {
-      font-size: 16px;
-      padding-right: 30px;
-    }
-
-    .main-header-top-items {
-      display: block!important;
-    }
-  }
-
-  .header-down-row {
-    display: block!important;
-    padding-bottom: 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-
-  .pizza-logo {
-    color: #fff!important;
-    background-image: url("JS-Pizza/Frontend/www/assets/images/discount.jpg");
-    background-color: #a3a0a0;
-
-    .title-2 {
-      font-size: 25px;
-    }
+  .discount-before {
+    width: 100px;
+    height: 11px;
+    background-image: url(../images/discount.jpg);
+    background-size: 100px;
+    position: fixed;
+    left: 6px;
   }
 
   .site-icon {
@@ -76,9 +37,58 @@
     font-size: 19px;
     padding-top: 15px;
     color: #fff;
+  }
+
+  .header-top-row {
+    box-sizing: border-box;
+    display: block;
+    color: #a1a1a1;
+    width: 60%;
+    text-align: right;
+    padding: 0 15px 0 0;
+
+    .phone-number {
+      display: inline-block;
+      font-size: 14px;
+      border-top-right-radius: 0px;
+    }
+
+    .work-days {
+      display: inline-block;
+      font-size: 12px;
+      padding-right: 30px;
+    }
+
+    .delivery {
+      display: inline-block;
+      font-size: 16px;
+      padding-right: 30px;
+    }
+
+    .sign-in-button {
+      margin-top: -11px;
+      right: @cartWidth + 10px;
+      display: inline-block;
+    }
 
   }
 
+  .header-down-row {
+    padding-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .pizza-logo {
+    text-align: center;
+    color: #fff !important;
+
+    .title-1 {
+      font-size: 19px;
+    }
+    .title-2 {
+      font-size: 25px;
+    }
+  }
 }
 
 .site-icon {
@@ -93,8 +103,4 @@
   padding: 15px 10px 10px;
 }
 
-.sign-in-button {
-  float: right;
-  margin-top: -11px;
-}
 
