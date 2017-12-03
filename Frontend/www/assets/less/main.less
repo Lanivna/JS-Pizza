@@ -4,6 +4,7 @@
 @mainWidth: 100% - @cartWidth;
 @zIndexHeader: 1100;
 @discountPanelWidth: 100;
+@headerHeight: 100px;
 
 body {
   padding-right: @cartWidth;
@@ -23,7 +24,10 @@ body {
   //padding-right: @cartWidth;
 }
 
-#main {}
+#main {
+  padding-top: @headerHeight;
+}
+
 #cart {
 }
 
