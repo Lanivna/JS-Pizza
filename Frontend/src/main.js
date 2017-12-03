@@ -11,5 +11,18 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
 
+    (function initTpls(tpls){
+        var Templates = require('./Templates');
+        for(var key in tpls){
+            var selector = tpls[key];
+            var $node = $(selector);
+            var _html = (Templates[key])({});
+            $node.html(_html);
+        }
+    })({
+        header: '#header',
+        footer: '#footer',
+    });
+    
 
 });
