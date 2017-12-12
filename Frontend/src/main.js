@@ -27,5 +27,6 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
     OrderForm.init();
+    (require('./map')).initMap();
 
 });

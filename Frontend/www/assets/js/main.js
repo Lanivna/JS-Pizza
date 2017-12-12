@@ -172,7 +172,7 @@ exports.footer = ejs.compile("<div class=\"discount-panel\">\r\n    <div class=\
 exports.cart = ejs.compile("<div id=\"cart-head\" class=\"order\">\r\n    <span class=\"order-title\"> Замовлення </span>\r\n    <span class=\"orange-circle total total-items\">0</span>\r\n    <span class=\"clean-order-title cart-clear\"> Очистити замовлення </span>\r\n</div>\r\n<div id=\"cart-empty\" class=\"cart-empty\">\r\n    <div class=\"text\">\r\n        Пусто в холодильнику? <br>\r\n        Замовте піцу!\r\n    </div>\r\n</div>\r\n<div id=\"cart-items\" class=\"cart-items\"></div>\r\n<div id=\"cart-summary\" class=\"cart-footer\">\r\n    <div class=\"text\">\r\n        Кількість товарів: <span class=\"total total-quantity\">0</span>\r\n    </div>\r\n\r\n    <div class=\"text\">\r\n        Загальна сума: <span class=\"total total-sum\">0</span> грн\r\n    </div>\r\n    <% var pageId = $('body').data('page-id'); %>\r\n    <% if(pageId == 'mainPage') { %>\r\n    <a href=\"/order.html\" class=\"btn btn-warning\">Замовити</a>\r\n    <% } else if(pageId == 'orderPage') { %>\r\n    <a href=\"/index.html\" class=\"btn btn-info\">Редагувати</a>\r\n    <% } %>\r\n</div>\r\n");
 exports.filters = ejs.compile("<ul class=\"nav nav-pills\">\r\n    <% filters.forEach(function(filter){ %>\r\n        <li><a data-toggle=\"pill\" href=\"#filter-<%= filter.key %>\"><%= filter.title %></a></li>\r\n    <% }); %>\r\n</ul>");
 
-},{"ejs":9}],4:[function(require,module,exports){
+},{"ejs":10}],4:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -202,9 +202,67 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
     OrderForm.init();
+    (require('./map')).initMap();
 
 });
-},{"./OrderForm":1,"./Templates":3,"./pizza/PizzaCart":5,"./pizza/PizzaMenu":6}],5:[function(require,module,exports){
+},{"./OrderForm":1,"./Templates":3,"./map":5,"./pizza/PizzaCart":6,"./pizza/PizzaMenu":7}],5:[function(require,module,exports){
+// https://developers.google.com/maps/documentation/javascript/examples/distance-matrix
+var $input = $('#input-addr');
+var geocoder = new google.maps.Geocoder;
+var map = null;
+// var mapNode = document.getElement
+
+function setAddressCenter(map, address){
+    // var _val = $input.val();
+    // console.log(_val);
+    //
+    geocoder.geocode({'address': address}, function(results, status) {
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            // var marker = new google.maps.Marker({
+            //     map: resultsMap,
+            //     position: results[0].geometry.location
+            // });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+function initMap() {
+    var $map = document.getElementById('order-map');
+    var _center = {lng: 30.523011, lat: 50.465890};
+    var mapOptions = {
+        center: _center,
+        zoom: 16,
+//            mapTypeId: google.maps.MapTypeId.HYBRID
+    };
+    // var map =
+    // window.$MAP =
+    map =
+    new google.maps.Map($map, mapOptions);
+
+//        var _markerPos = {lat: 44.5, lng: 48.5};
+    var _markerPos = _center;
+    var marker = new google.maps.Marker({
+        position: _markerPos,
+        map: map,
+        title: 'LanaPizza',
+    });
+
+    $input.on('change', function(){
+        setAddressCenter(map, $input.val());
+    });
+
+    return map;
+}
+
+module.exports = {
+    initMap: initMap,
+};
+
+
+},{}],6:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -392,7 +450,7 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
-},{"../Templates":3,"basil.js":7}],6:[function(require,module,exports){
+},{"../Templates":3,"basil.js":8}],7:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -476,7 +534,7 @@ function initialiseMenu() {
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
-},{"../Pizza_Filters":2,"../Templates":3,"./PizzaCart":5}],7:[function(require,module,exports){
+},{"../Pizza_Filters":2,"../Templates":3,"./PizzaCart":6}],8:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -864,9 +922,9 @@ exports.initialiseMenu = initialiseMenu;
 
 })();
 
-},{}],8:[function(require,module,exports){
-
 },{}],9:[function(require,module,exports){
+
+},{}],10:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1734,7 +1792,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":11,"./utils":10,"fs":8,"path":12}],10:[function(require,module,exports){
+},{"../package.json":12,"./utils":11,"fs":9,"path":13}],11:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1900,7 +1958,7 @@ exports.cache = {
   }
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports={
   "_from": "ejs@^2.4.1",
   "_id": "ejs@2.5.7",
@@ -1981,7 +2039,7 @@ module.exports={
   "version": "2.5.7"
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2209,7 +2267,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":13}],13:[function(require,module,exports){
+},{"_process":14}],14:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
