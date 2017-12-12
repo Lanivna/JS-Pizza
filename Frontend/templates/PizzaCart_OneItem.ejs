@@ -7,7 +7,7 @@ function sizeString(size){
     <img src="<%= pizza.icon %>" alt="<%= pizza.title %>" class="pizza-cart-img">
     <span class="pizza-cart-title"><%= pizza.title %> (<%= sizeString(size) %>)</span>
     <div class="pizza-cart-info">
-        <div class="pizza-cart-price">Ціна: <%= pizza[size].price %> грн</div>
+        <div class="pizza-cart-price"><%= pizza[size].price %>грн</div>
     </div>
     <% if(editable) { %>
     <div class="pizza-cart-count">

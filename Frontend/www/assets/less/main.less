@@ -3,16 +3,41 @@
 @cartWidth: 25%;
 @mainWidth: 100% - @cartWidth;
 @zIndexHeader: 1100;
-@discountPanelWidth: 100;
+@discountPanelWidth: 110px;
+@discountPanelColor: #ea862e;
+@discountPanelHeight: 90px;
 @headerHeight: 100px;
 
 body {
   padding-right: @cartWidth;
+
+  #main {
+    padding-top: @headerHeight;
+
+    .p-title {
+      //display: inline;
+      //box-sizing: border-box;
+      text-align: center;
+
+      .page-title {
+        display: inline-block;
+        margin-right: 10px;
+        box-sizing: border-box;
+        font-size: 36px;
+        font-weight: 500;
+        line-height: 1.1;
+        color: #333333;
+        font-family: Arial;
+      }
+
+      .orange-circle {
+        display: inline-block;
+      }
+    }
+  }
+
 }
 
-#main {
-  padding-top: @headerHeight;
-}
 
 @import "header";
 @import "pizza/pizza-card";
@@ -25,6 +50,9 @@ body {
 .h1{
   font-size: 18px;
 }
+
+
+
 //.row {
 //  margin-right: -15px;
 //  margin-left: -15px;

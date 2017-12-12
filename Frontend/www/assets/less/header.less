@@ -20,7 +20,7 @@
   .discount-before {
     width: 100px;
     height: 11px;
-    background-image: url(../images/discount.jpg);
+    background-image: url(../images/discount.svg);
     background-size: 100px;
     position: fixed;
     left: 6px;
@@ -30,10 +30,10 @@
     position: fixed;
     top: 0;
     left: 6px;
-    background: #ea862e;
-    z-index: 99;
-    width: 100px;
-    height: 90px;
+    background: @discountPanelColor;
+    z-index: @zIndexHeader;
+    width: @discountPanelWidth;
+    height: @discountPanelHeight;
     font-size: 19px;
     padding-top: 15px;
     color: #fff;
