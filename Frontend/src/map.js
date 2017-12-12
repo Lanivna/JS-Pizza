@@ -2,6 +2,7 @@
 var $input = $('#input-addr');
 var geocoder = new google.maps.Geocoder;
 var map = null;
+var $map = document.getElementById('order-map');
 // var mapNode = document.getElement
 
 function setAddressCenter(map, address){
@@ -22,7 +23,6 @@ function setAddressCenter(map, address){
 }
 
 function initMap() {
-    var $map = document.getElementById('order-map');
     var _center = {lng: 30.523011, lat: 50.465890};
     var mapOptions = {
         center: _center,
@@ -40,6 +40,7 @@ function initMap() {
         position: _markerPos,
         map: map,
         title: 'LanaPizza',
+        icon: "/assets/images/map-icon.png",
     });
 
     $input.on('change', function(){

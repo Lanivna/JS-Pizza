@@ -49,6 +49,13 @@ function doValidate(field_info){
     return _isValid;
 }
 
+function formValidate(){
+
+    FormValid = true;
+    Fields.forEach(doValidate);
+    return FormValid;
+}
+
 function showValidness($node, isValid, message){
     var $group = $node.closest('.form-group');
     var $help = $group.find('.help-block');
@@ -66,20 +73,24 @@ function showValidness($node, isValid, message){
     return $node;
 }
 
-function onSubmit(){
-    //TODO: validate
-    // var _data = $form.serialize();
-    FormValid = true;
-    Fields.forEach(doValidate);
+var liqpay = require('./liqpay');
 
-    if(FormValid){
+function onSubmit(){
+    console.log('Form submitted....');
+
+    if(formValidate()){
         $.ajax({
             url: $form.attr('action'),
             data: $form.serialize(),
             method: $form.attr('method'),
             // error: function(x, y, z){},
             success: function(response){
+                console.log('API answered...'),
                 console.log(response);
+                liqpay.initLiqPay({
+                    data: response.data,
+                    signature: response.signature,
+                });
             },
         });
     } else {

@@ -48,13 +48,18 @@
     <div class="row">
         <div class="form-group">
             <button class="btn btn-warning" id="order-btn">Order!</button>
+            <!--<input type="submit" class="btn btn-warning" id="order-submit" value="Order!">-->
         </div>
     </div>
     <div class="row">
-        <div class="map map-order" id="order-map">
-
-        </div>
+        <div class="map map-order" id="order-map"></div>
+    </div>
+    <div class="row">
+        <!-- місце для віджету -->
+        <div class="liqpay" id="liqpay"></div>
+        <!-- піключаємо скрипт -->
     </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_vNV04d0B0uFLUsq_jioZ1dPhd6-8GMM"></script>
+<script	src="//static.liqpay.com/libjs/checkout.js"></script>
 <% include common/footer.ejs %>

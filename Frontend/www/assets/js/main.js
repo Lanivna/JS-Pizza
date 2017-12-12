@@ -50,6 +50,13 @@ function doValidate(field_info){
     return _isValid;
 }
 
+function formValidate(){
+
+    FormValid = true;
+    Fields.forEach(doValidate);
+    return FormValid;
+}
+
 function showValidness($node, isValid, message){
     var $group = $node.closest('.form-group');
     var $help = $group.find('.help-block');
@@ -67,20 +74,24 @@ function showValidness($node, isValid, message){
     return $node;
 }
 
-function onSubmit(){
-    //TODO: validate
-    // var _data = $form.serialize();
-    FormValid = true;
-    Fields.forEach(doValidate);
+var liqpay = require('./liqpay');
 
-    if(FormValid){
+function onSubmit(){
+    console.log('Form submitted....');
+
+    if(formValidate()){
         $.ajax({
             url: $form.attr('action'),
             data: $form.serialize(),
             method: $form.attr('method'),
             // error: function(x, y, z){},
             success: function(response){
+                console.log('API answered...'),
                 console.log(response);
+                liqpay.initLiqPay({
+                    data: response.data,
+                    signature: response.signature,
+                });
             },
         });
     } else {
@@ -100,7 +111,7 @@ module.exports = {
     init: initForm,
 };
 
-},{}],2:[function(require,module,exports){
+},{"./liqpay":4}],2:[function(require,module,exports){
 var filters = [
      {
         key: "all",
@@ -172,7 +183,24 @@ exports.footer = ejs.compile("<div class=\"discount-panel\">\r\n    <div class=\
 exports.cart = ejs.compile("<div id=\"cart-head\" class=\"order\">\r\n    <span class=\"order-title\"> Замовлення </span>\r\n    <span class=\"orange-circle total total-items\">0</span>\r\n    <span class=\"clean-order-title cart-clear\"> Очистити замовлення </span>\r\n</div>\r\n<div id=\"cart-empty\" class=\"cart-empty\">\r\n    <div class=\"text\">\r\n        Пусто в холодильнику? <br>\r\n        Замовте піцу!\r\n    </div>\r\n</div>\r\n<div id=\"cart-items\" class=\"cart-items\"></div>\r\n<div id=\"cart-summary\" class=\"cart-footer\">\r\n    <div class=\"text\">\r\n        Кількість товарів: <span class=\"total total-quantity\">0</span>\r\n    </div>\r\n\r\n    <div class=\"text\">\r\n        Загальна сума: <span class=\"total total-sum\">0</span> грн\r\n    </div>\r\n    <% var pageId = $('body').data('page-id'); %>\r\n    <% if(pageId == 'mainPage') { %>\r\n    <a href=\"/order.html\" class=\"btn btn-warning\">Замовити</a>\r\n    <% } else if(pageId == 'orderPage') { %>\r\n    <a href=\"/index.html\" class=\"btn btn-info\">Редагувати</a>\r\n    <% } %>\r\n</div>\r\n");
 exports.filters = ejs.compile("<ul class=\"nav nav-pills\">\r\n    <% filters.forEach(function(filter){ %>\r\n        <li><a data-toggle=\"pill\" href=\"#filter-<%= filter.key %>\"><%= filter.title %></a></li>\r\n    <% }); %>\r\n</ul>");
 
-},{"ejs":10}],4:[function(require,module,exports){
+},{"ejs":11}],4:[function(require,module,exports){
+const SELECTOR = '#liqpay';
+
+function initLiqPay(options, callbacks){
+    // callbacks = callbacks || {};
+    options = options || {};
+    options.embedTo = options.embedTo || SELECTOR;
+    options.mode = options.mode || 'popup';
+    var _checkout = LiqPayCheckout.init(options);
+    for(var key in callbacks || {}){
+        _checkout.on('key', callbacks[key]);
+    }
+    return _checkout;
+}
+
+module.exports.initLiqPay = initLiqPay;
+
+},{}],5:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -205,11 +233,12 @@ $(function(){
     (require('./map')).initMap();
 
 });
-},{"./OrderForm":1,"./Templates":3,"./map":5,"./pizza/PizzaCart":6,"./pizza/PizzaMenu":7}],5:[function(require,module,exports){
+},{"./OrderForm":1,"./Templates":3,"./map":6,"./pizza/PizzaCart":7,"./pizza/PizzaMenu":8}],6:[function(require,module,exports){
 // https://developers.google.com/maps/documentation/javascript/examples/distance-matrix
 var $input = $('#input-addr');
 var geocoder = new google.maps.Geocoder;
 var map = null;
+var $map = document.getElementById('order-map');
 // var mapNode = document.getElement
 
 function setAddressCenter(map, address){
@@ -230,7 +259,6 @@ function setAddressCenter(map, address){
 }
 
 function initMap() {
-    var $map = document.getElementById('order-map');
     var _center = {lng: 30.523011, lat: 50.465890};
     var mapOptions = {
         center: _center,
@@ -248,6 +276,7 @@ function initMap() {
         position: _markerPos,
         map: map,
         title: 'LanaPizza',
+        icon: "/assets/images/map-icon.png",
     });
 
     $input.on('change', function(){
@@ -262,7 +291,7 @@ module.exports = {
 };
 
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -450,7 +479,7 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
-},{"../Templates":3,"basil.js":8}],7:[function(require,module,exports){
+},{"../Templates":3,"basil.js":9}],8:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -534,7 +563,7 @@ function initialiseMenu() {
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
-},{"../Pizza_Filters":2,"../Templates":3,"./PizzaCart":6}],8:[function(require,module,exports){
+},{"../Pizza_Filters":2,"../Templates":3,"./PizzaCart":7}],9:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -922,9 +951,9 @@ exports.initialiseMenu = initialiseMenu;
 
 })();
 
-},{}],9:[function(require,module,exports){
-
 },{}],10:[function(require,module,exports){
+
+},{}],11:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1792,7 +1821,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":12,"./utils":11,"fs":9,"path":13}],11:[function(require,module,exports){
+},{"../package.json":13,"./utils":12,"fs":10,"path":14}],12:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1958,7 +1987,7 @@ exports.cache = {
   }
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports={
   "_from": "ejs@^2.4.1",
   "_id": "ejs@2.5.7",
@@ -2039,7 +2068,7 @@ module.exports={
   "version": "2.5.7"
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2267,7 +2296,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":14}],14:[function(require,module,exports){
+},{"_process":15}],15:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2453,4 +2482,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[4]);
+},{}]},{},[5]);
