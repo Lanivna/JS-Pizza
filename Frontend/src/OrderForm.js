@@ -1,6 +1,10 @@
 var $form = $('#order-form');
 var $btn = $('#order-btn');
 var $map = $('#order-map');
+var $addr = $form.find('[name="addr"]');
+var map = require('./map');
+var liqpay = require('./liqpay');
+var cart = require('./pizza/PizzaCart');
 
 var Fields = [
     {
@@ -73,9 +77,6 @@ function showValidness($node, isValid, message){
     return $node;
 }
 
-var liqpay = require('./liqpay');
-var cart = require('./pizza/PizzaCart');
-
 function onSubmit(){
     console.log('Form submitted....');
 
@@ -104,6 +105,15 @@ function initForm(){
 
     $btn.click(function(){
         onSubmit();
+    });
+
+    map.onClickAddress(function(addr){
+        $addr.val(addr).trigger('change');
+    });
+
+    $addr.on('change', function(){
+        // $('#output-addr').text($addr.val());
+        map.setDestinationAddress($addr.val());
     });
 }
 
