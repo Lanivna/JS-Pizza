@@ -74,6 +74,7 @@ function showValidness($node, isValid, message){
 }
 
 var liqpay = require('./liqpay');
+var cart = require('./pizza/PizzaCart');
 
 function onSubmit(){
     console.log('Form submitted....');
@@ -81,7 +82,7 @@ function onSubmit(){
     if(formValidate()){
         $.ajax({
             url: $form.attr('action'),
-            data: $form.serialize(),
+            data: $form.serialize() + '&cart=' + JSON.stringify(cart.getCart()),
             method: $form.attr('method'),
             // error: function(x, y, z){},
             success: function(response){

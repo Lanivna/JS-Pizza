@@ -75,6 +75,7 @@ function showValidness($node, isValid, message){
 }
 
 var liqpay = require('./liqpay');
+var cart = require('./pizza/PizzaCart');
 
 function onSubmit(){
     console.log('Form submitted....');
@@ -82,7 +83,7 @@ function onSubmit(){
     if(formValidate()){
         $.ajax({
             url: $form.attr('action'),
-            data: $form.serialize(),
+            data: $form.serialize() + '&cart=' + JSON.stringify(cart.getCart()),
             method: $form.attr('method'),
             // error: function(x, y, z){},
             success: function(response){
@@ -111,7 +112,7 @@ module.exports = {
     init: initForm,
 };
 
-},{"./liqpay":4}],2:[function(require,module,exports){
+},{"./liqpay":4,"./pizza/PizzaCart":7}],2:[function(require,module,exports){
 var filters = [
      {
         key: "all",
@@ -479,6 +480,10 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
+
+exports.getCart = function(){ return Cart; };
+exports.getCartTotal = function(){ return CartTotal; };
+
 },{"../Templates":3,"basil.js":9}],8:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.

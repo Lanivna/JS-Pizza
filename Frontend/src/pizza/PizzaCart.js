@@ -185,3 +185,6 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
+
+exports.getCart = function(){ return Cart; };
+exports.getCartTotal = function(){ return CartTotal; };
