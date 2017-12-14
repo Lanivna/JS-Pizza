@@ -97,7 +97,6 @@ function onSubmit(){
             },
         });
     } else {
-        //TODO: ...
     }
 }
 
@@ -113,7 +112,6 @@ function initForm(){
     });
 
     $addr.on('change', function(){
-        // $('#output-addr').text($addr.val());
         map.setDestinationAddress($addr.val());
     });
 }
@@ -178,9 +176,7 @@ var filters = [
 module.exports = filters;
 
 },{}],3:[function(require,module,exports){
-/**
- * Created by chaika on 02.02.16.
- */
+
 
 var ejs = require('ejs');
 
@@ -198,7 +194,6 @@ exports.filters = ejs.compile("<ul class=\"nav nav-pills\">\r\n    <% filters.fo
 const SELECTOR = '#liqpay';
 
 function initLiqPay(options, callbacks){
-    // callbacks = callbacks || {};
     options = options || {};
     options.embedTo = options.embedTo || SELECTOR;
     options.mode = options.mode || 'popup';
@@ -212,9 +207,7 @@ function initLiqPay(options, callbacks){
 module.exports.initLiqPay = initLiqPay;
 
 },{}],5:[function(require,module,exports){
-/**
- * Created by chaika on 25.01.16.
- */
+
 
 $(function(){
 
@@ -232,10 +225,8 @@ $(function(){
         cart: '#cart',
     });
 
-    //This code will execute when the page is ready
     var PizzaMenu = require('./pizza/PizzaMenu');
     var PizzaCart = require('./pizza/PizzaCart');
-    // var Pizza_List = require('./Pizza_List');
     var OrderForm = require('./OrderForm');
 
     PizzaCart.initialiseCart();
@@ -246,27 +237,18 @@ $(function(){
         (require('./map')).initMap();}
 });
 },{"./OrderForm":1,"./Templates":3,"./map":6,"./pizza/PizzaCart":7,"./pizza/PizzaMenu":8}],6:[function(require,module,exports){
-// https://developers.google.com/maps/documentation/javascript/examples/distance-matrix
 var $input = $('#input-addr');
-// var geocoder = new google.maps.Geocoder;
 var map = null;
 var $map = document.getElementById('order-map');
-// var mapNode = document.getElement
 var callbacks = {};
 const homeLatLng = {lng: 30.523011, lat: 50.465890};
 
 function setAddressCenter(map, address){
-    // var _val = $input.val();
-    // console.log(_val);
-    //
+
     var geocoder = new google.maps.Geocoder;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
-            // var marker = new google.maps.Marker({
-            //     map: resultsMap,
-            //     position: results[0].geometry.location
-            // });
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }

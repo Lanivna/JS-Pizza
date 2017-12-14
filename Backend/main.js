@@ -1,6 +1,3 @@
-/**
- * Created by chaika on 09.02.16.
- */
 var express = require('express');
 var path = require('path');
 var morgan = require('morgan');

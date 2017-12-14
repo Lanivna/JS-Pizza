@@ -1,6 +1,3 @@
-/**
- * Created by chaika on 02.02.16.
- */
 var Templates = require('../Templates');
 var basil	=	new (require('basil.js'))();
 
@@ -26,12 +23,10 @@ function saveCart(){
     console.log(basil.get('cart'));
 }
 function loadCart(){
-    //TODO: validate loaded
     console.log('loadCart()');
     console.log(basil.get('cart'));
     Cart = basil.get('cart') || [];
     console.log(Cart);
-    // updateTotals();
     updateCart();
     return Cart;
 }
@@ -54,15 +49,12 @@ $cart.find('.cart-clear').click(function(){
 
 function addToCart(pizza, size) {
     //Додавання однієї піци в кошик покупок
-    //TODO: check if not exists in the Cart already
-    // https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/find
     var old_item = Cart.find(function(elem, index, array){
         return elem.pizza.id == pizza.id && elem.size == size;
     });
     if(old_item){
         old_item.quantity += 1;
     } else {
-        //Приклад реалізації, можна робити будь-яким іншим способом
         Cart.push({
             pizza: pizza,
             size: size,
@@ -80,17 +72,12 @@ function removeFromCart(cart_item) {
     Cart = Cart.filter(function(elem){
         return !(elem.pizza.id == cart_item.pizza.id && elem.size == cart_item.size);
     });
-    // console.log('removeFromCart');
-    // console.log(cart_item);
 
-    //Після видалення оновити відображення
     updateCart();
 }
 
 function initialiseCart(options) {
-    //Фукнція віпрацьвуватиме при завантаженні сторінки
-    //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
-    // options = options || {};
+
     var _defaults = {
         // editable: true,
         editable: !$cart.hasClass('cart-const'),
@@ -121,9 +108,7 @@ function updateTotals() {
 
 function updateCart() {
     //Функція викликається при зміні вмісту кошика
-    //Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
-
-    //Очищаємо старі піци в кошику
+  //Очищаємо старі піци в кошику
     $cartItems.html("");
     dropTotals();
 
@@ -165,7 +150,6 @@ function updateCart() {
         showOnePizzaInCart(cart_item);
     }
 
-    // Cart.forEach(showOnePizzaInCart);
     Cart.forEach(processPizzaInCart);
     updateTotals();
     if(CartTotal.quantity > 0){

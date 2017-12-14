@@ -33,8 +33,6 @@ var FormValid = false;
 var $fields = {};
 
 function initFields(){
-    //TODO: ...
-    // Fields = fields;
     Fields.forEach(function(field){
         var $node = $('[name="' + field.name + '"]');
         $fields[field.name] = $node;
@@ -45,7 +43,6 @@ function initFields(){
 }
 
 function doValidate(field_info){
-    // var $node = $('[name="' + field_info.name + '"]');
     var $node = $fields[field_info.name];
     var _isValid = (!field_info.validator || field_info.validator($node.val()));
     showValidness($node, _isValid, field_info.errorMessage);
@@ -85,7 +82,6 @@ function onSubmit(){
             url: $form.attr('action'),
             data: $form.serialize() + '&cart=' + JSON.stringify(cart.getCart()),
             method: $form.attr('method'),
-            // error: function(x, y, z){},
             success: function(response){
                 console.log('API answered...'),
                 console.log(response);
@@ -112,7 +108,6 @@ function initForm(){
     });
 
     $addr.on('change', function(){
-        // $('#output-addr').text($addr.val());
         map.setDestinationAddress($addr.val());
     });
 }

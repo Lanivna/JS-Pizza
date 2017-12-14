@@ -1,9 +1,5 @@
-/**
- * Created by chaika on 02.02.16.
- */
 var Templates = require('../Templates');
 var PizzaCart = require('./PizzaCart');
-// var Pizza_List = require('../Pizza_List');
 var Pizza_List = [];
 var Pizza_Filters = require('../Pizza_Filters');
 
@@ -39,10 +35,7 @@ function filterPizza(filter) {
     var pizza_shown = [];
 
     Pizza_List.forEach(function(pizza){
-        //Якщо піка відповідає фільтру
-        //pizza_shown.push(pizza);
-        
-        //TODO: зробити фільтри
+
         if (filter.filter(pizza)){
             pizza_shown.push(pizza);
 
@@ -73,10 +66,6 @@ function initialiseMenu() {
         },
     });
 
-
-    //Показуємо усі піци
-    // showPizzaList(Pizza_List);
-    // showFilters(Pizza_Filters);
 }
 
 exports.filterPizza = filterPizza;

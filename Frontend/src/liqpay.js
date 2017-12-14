@@ -1,7 +1,6 @@
 const SELECTOR = '#liqpay';
 
 function initLiqPay(options, callbacks){
-    // callbacks = callbacks || {};
     options = options || {};
     options.embedTo = options.embedTo || SELECTOR;
     options.mode = options.mode || 'popup';
