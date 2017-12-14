@@ -1,106 +1,109 @@
 #header {
   position: fixed;
-  //right: @cartWidth;
+  right: @cartWidth;
   left: 0;
   top: 0;
   z-index: @zIndexHeader;
 }
 
 .top-panel {
-  background: rgba(0, 0, 0, .8);
-  z-index: 10;
-  right: @cartWidth;
   position: fixed;
-
-  .top-discount {
-    top: 90px;
-    transform: scaleY(-1);
-  }
-
-  .discount-before {
-    width: 100px;
-    height: 11px;
-    background-image: url(../images/discount.svg);
-    background-size: 100px;
-    position: fixed;
-    left: 6px;
-  }
-
-  .site-icon {
-    position: fixed;
-    top: 0;
-    left: 6px;
-    background: @discountPanelColor;
-    z-index: @zIndexHeader;
-    width: @discountPanelWidth;
-    height: @discountPanelHeight;
-    font-size: 19px;
-    padding-top: 15px;
-    color: #fff;
-  }
-
-  .header-top-row {
-    box-sizing: border-box;
-    display: block;
-    color: #a1a1a1;
-    width: 60%;
-    text-align: right;
-    padding: 0 15px 0 0;
-
-    .phone-number {
-      display: inline-block;
-      font-size: 14px;
-      border-top-right-radius: 0px;
-    }
-
-    .work-days {
-      display: inline-block;
-      font-size: 12px;
-      padding-right: 30px;
-    }
-
-    .delivery {
-      display: inline-block;
-      font-size: 16px;
-      padding-right: 30px;
-    }
-
-    .sign-in-button {
-      margin-top: -11px;
-      right: @cartWidth + 10px;
-      display: inline-block;
-    }
-
-  }
-
-  .header-down-row {
-    padding-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .pizza-logo {
-    text-align: center;
-    color: #fff !important;
-
-    .title-1 {
-      font-size: 19px;
-    }
-    .title-2 {
-      font-size: 25px;
-    }
-  }
+  right: @cartWidth;
+  background: rgba(0,0,0,.8);
+  z-index: 10;
 }
 
 .site-icon {
-  position: fixed;
-  top: 0px;
-  z-index: 99;
-  width: 100px;
-  height: 90px;
-  font-size: 19px;
-  color: rgb(255, 255, 255);
-  background: rgb(234, 134, 46);
-  padding: 15px 10px 10px;
+      position: fixed;
+      top: 0;
+      background: #ea862e;
+      z-index: 99;
+      width: 100px;
+      height: 90px;
+      font-size: 18px;
+      padding: 10px;
+      padding-top: 15px;
+      color: #fff;
+      text-align: center;
+      left: 8px;
+      text-transform: uppercase;
+
+    .pizza-logo {
+      color: #fff;
+
+      .title-2 {
+        font-size: 27px;
+      }
+    }
 }
 
+.discount-before {
+  width: 100px;
+  height: 26px;
+  background-image: url(../images/discount.svg);
+  transform: scaleY(-1);
+  background-size: 100px 26px;
+  background-repeat: no-repeat;
+  left: -10px;
+  position: relative;
+  background-color: transparent;
 
+}
+
+.header-top-row {
+      width: 100%;
+      font-size: 12px;
+      line-height: 11px;
+      margin: 0;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid;
+      color: #a1a1a1;
+
+
+  .phone-number {
+    font-size: 18px;
+    padding: 0px;
+    display: inline-block;
+    margin-left: 200px;
+    margin-bottom: 10px;
+
+  }
+
+  .work-days {
+    font-size: 12px;
+    display: inline-block;
+    margin-left: 130px;
+    margin-bottom: 10px;
+
+
+  }
+
+  .delivery {
+    font-size: 16px;
+    display: inline-block;
+    margin-left: 110px;
+    margin-bottom: 10px;
+    margin-right: 55px;
+
+  }
+
+  .sign-in-button {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+
+
+}
+
+.header-down-row {
+
+  .hidden-xs {
+  margin-left: 120px;
+  font-size: 15px;
+    cursor: pointer;
+  }
+
+}

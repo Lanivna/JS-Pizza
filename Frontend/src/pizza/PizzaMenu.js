@@ -41,10 +41,11 @@ function filterPizza(filter) {
     Pizza_List.forEach(function(pizza){
         //Якщо піка відповідає фільтру
         //pizza_shown.push(pizza);
-
+        
         //TODO: зробити фільтри
         if (filter.filter(pizza)){
             pizza_shown.push(pizza);
+
         }
     });
 

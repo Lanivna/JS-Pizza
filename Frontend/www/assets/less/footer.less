@@ -1,149 +1,60 @@
 #footer {
-  //position: fixed;
   right: @cartWidth;
-  left: 0;
-  bottom: 0;
-  z-index: @zIndexHeader;
-  padding: 40px 0;
+  color: grey;
+  background-color: #fff;
   border-top: 1px solid #e5e5e5;
-  border-left: @discountPanelWidth;
-
-
-  .discount-panel {
-    position: fixed;
-    bottom: 0;
-    left: 6px;
-    width: @discountPanelWidth;
-    background-color: @discountPanelColor;
-    z-index: @zIndexHeader;
-    height: @discountPanelHeight;
-    //font-size: 19px;
-    //color: rgb(255, 255, 255);
-    padding: 15px 10px 10px;
-    //
-    //
-    //  z-index: 99;
-    //  width: 100px;
-    //  height: 90px;
-    //  font-size: 19px;
-    //  padding: 10px;
-    //  padding-top: 15px;
-    //  color: #fff;
-    //}
-  }
-
-  .discount-before {
-    width: 100px;
-    height: 11px;
-    background-image: url(../images/discount.jpg);
-    background-size: 100px 11px;
-    position: absolute;
-    left: 6px;
-  }
-
-  .p{
-
-    text-align: center;
-    display: block;
-    padding-left: 50px;
-  }
+  bottom: 0;
+  padding: 25px;
 }
 
-  //.discount-before{
-  //
-  //}
-  //
-  //.discount-title{
-  //  font-size: large;
-  //  font-family: Calibri;
-  //}
-  //
-  //.discount-text{
-  //  font-size: smaller;
-  //  font-family: Calibri;
-  //}
+.discount-panel {
 
-.top-panel {
-  background: rgba(0, 0, 0, .8);
-  z-index: 10;
-  right: @cartWidth;
-  position: fixed;
+      position: fixed;
+      bottom: 0;
+      width: 100px;
+      z-index: 99;
+      height: 120px;
+      padding: 10px;
+      color: #fff;
 
-  .top-discount {
-    top: 90px;
-    transform: scaleY(-1);
-  }
+
+  background: #ea862e;
+  text-align: center;
+  left: 8px;
+  text-transform: uppercase;
 
   .discount-before {
     width: 100px;
-    height: 11px;
+    height: 16px;
+    top: -11px;
+    left: 0px;
     background-image: url(../images/discount.svg);
-    background-size: 100px;
-    position: fixed;
-    left: 6px;
+    background-size: 100px 14px;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    transform: scaleY(1);
   }
 
-  .site-icon {
-    position: fixed;
-    top: 0;
-    left: 6px;
-    background: #ea862e;
-    z-index: 99;
-    width: 100px;
-    height: 90px;
-    font-size: 19px;
-    padding-top: 15px;
-    color: #fff;
+  .discount-title {
+    font-size: 17px;
+    font-weight: 700;
+    border-bottom: dashed;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(209, 99, 1);;
   }
 
-  .header-top-row {
-    box-sizing: border-box;
-    display: block;
-    color: #a1a1a1;
-    width: 60%;
-    text-align: right;
-    padding: 0 15px 0 0;
-
-    .phone-number {
-      display: inline-block;
-      font-size: 14px;
-      border-top-right-radius: 0px;
-    }
-
-    .work-days {
-      display: inline-block;
-      font-size: 12px;
-      padding-right: 30px;
-    }
-
-    .delivery {
-      display: inline-block;
-      font-size: 16px;
-      padding-right: 30px;
-    }
-
-    .sign-in-button {
-      margin-top: -11px;
-      right: @cartWidth + 10px;
-      display: inline-block;
-    }
-
-  }
-
-  .header-down-row {
-    padding-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .pizza-logo {
-    text-align: center;
-    color: #fff !important;
-
-    .title-1 {
-      font-size: 19px;
-    }
-    .title-2 {
-      font-size: 25px;
-    }
+  .discount-text {
+    font-size: 17px;
+    font-weight: 700;
   }
 }
+
+.comment {
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.42857143;
+  margin-top: 5px;
+}
+

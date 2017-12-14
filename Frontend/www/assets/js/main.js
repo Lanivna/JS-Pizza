@@ -189,8 +189,8 @@ exports.PizzaMenu_OneItem = ejs.compile("<%\r\n\r\nfunction getIngredientsArray(
 
 exports.PizzaCart_OneItem = ejs.compile("<%\r\nfunction sizeString(size){\r\n    return size == 'big_size' ? 'Велика' : (size == 'small_size' ? 'Маленька' : null);\r\n}\r\n%>\r\n<div class=\"pizza-cart-card\">\r\n    <img src=\"<%= pizza.icon %>\" alt=\"<%= pizza.title %>\" class=\"pizza-cart-img\">\r\n    <span class=\"pizza-cart-title\"><%= pizza.title %> (<%= sizeString(size) %>)</span>\r\n    <div class=\"pizza-cart-info\">\r\n        <div class=\"pizza-cart-price\"><%= pizza[size].price %>грн</div>\r\n    </div>\r\n    <% if(editable) { %>\r\n    <div class=\"pizza-cart-count\">\r\n        <button class=\"btn btn-danger minus\">-</button>\r\n        <span class=\"label label-default pizza-cart-quantity\"><%= quantity %></span>\r\n        <button class=\"btn btn-success plus\">+</button>\r\n        <button class=\"btn btn-info delete\">x</button>\r\n    </div>\r\n    <% } else { %>\r\n    <div class=\"pizza-cart-count pizza-cart-const\">\r\n        <span class=\"label label-default pizza-cart-quantity\"><%= quantity %></span>\r\n    </div>\r\n    <% } %>\r\n</div>\r\n");
 
-exports.header = ejs.compile("<div class=\"navbar navbar-fixed-top top-panel\">\r\n    <div class=\"site-icon\">\r\n        <div class=\"discount-before top-discount\">\r\n        </div>\r\n        <a class=\"pizza-logo\" href=\"/index.html\">\r\n            <div id=\"pizza-title2\" class=\"title-1\">\r\n                Pizza\r\n            </div>\r\n            <div class=\"title-2\">\r\n                KMA\r\n            </div>\r\n        </a>\r\n    </div>\r\n    <div class=\"header-top-row\">\r\n            <div class=\"phone-number\">\r\n                (044) 222 5 222\r\n            </div>\r\n            <div class=\"work-days\">\r\n                24 години/ 7 днів на тиждень\r\n            </div>\r\n            <div class=\"delivery\">\r\n                Безкоштовна доставка піци\r\n            </div>\r\n            <div type=\"button\" class=\"btn btn-warning sign-in-button\">\r\n                Ввійти\r\n            </div>\r\n    </div>\r\n\r\n    <div class=\"header-down-row\">\r\n        <span class=\" pizza-page\" style=\"color:white;\">\r\n            <a href=\"/index.html\" style=\"color:white;\" class=\"hidden-xs\">Піца</a> &nbsp;\r\n        </span>\r\n\r\n    </div>\r\n\r\n</div>");
-exports.footer = ejs.compile("<div class=\"discount-panel\">\r\n    <div class=\"discount-before\">\r\n    </div>\r\n    <div class=\"discount-title\">\r\n        Цього тижня<br> на все\r\n    </div>\r\n    <div class=\"discount-text\">\r\n        -20%\r\n    </div>\r\n</div>\r\n<div>\r\n    <p>Pizza.22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>\r\n    <p>Доставка піци не здійснюється</p>\r\n</div>");
+exports.header = ejs.compile("<div class=\"navbar navbar-fixed-top top-panel\">\r\n    <div class=\"site-icon\">\r\n        <a class=\"pizza-logo\" href=\"/index.html\">\r\n            <div id=\"pizza-title2\" class=\"title-1\">\r\n                Pizza\r\n            </div>\r\n            <div class=\"title-2\">\r\n                KMA\r\n            </div>\r\n        </a>\r\n        <div class=\"discount-before top-discount\">\r\n        </div>\r\n    </div>\r\n    <div class=\"header-top-row\">\r\n            <div class=\"phone-number\">\r\n                (044) 222 5 222\r\n            </div>\r\n            <div class=\"work-days\">\r\n                24 години/ 7 днів на тиждень\r\n            </div>\r\n            <div class=\"delivery\">\r\n                Безкоштовна доставка піци\r\n            </div>\r\n        <div type=\"button\" class=\"btn btn-warning sign-in-button\">\r\n            Ввійти\r\n        </div>\r\n\r\n    </div>\r\n\r\n    <div class=\"header-down-row\">\r\n        <span class=\" pizza-page\" style=\"color:white;\">\r\n            <a href=\"/index.html\" style=\"color:white;\" class=\"hidden-xs\">Піца</a> &nbsp;\r\n        </span>\r\n\r\n    </div>\r\n\r\n</div>");
+exports.footer = ejs.compile("<div class=\"discount-panel\">\r\n    <div class=\"discount-before\">\r\n    </div>\r\n    <div class=\"discount-title\">\r\n        Цього тижня<br> на все\r\n    </div>\r\n    <div class=\"discount-text\">\r\n        -20%\r\n    </div>\r\n</div>\r\n<div class=\"comment\">\r\n    <p>Pizza.22 - практичний проект в межах курсу JavaScript в Києво-Могилянській Академії</p>\r\n    <p>Доставка піци не здійснюється</p>\r\n</div>");
 exports.cart = ejs.compile("<div id=\"cart-head\" class=\"order\">\r\n    <span class=\"order-title\"> Замовлення </span>\r\n    <span class=\"orange-circle total total-items\">0</span>\r\n    <span class=\"clean-order-title cart-clear\"> Очистити замовлення </span>\r\n</div>\r\n<div id=\"cart-empty\" class=\"cart-empty\">\r\n    <div class=\"text\">\r\n        Пусто в холодильнику? <br>\r\n        Замовте піцу!\r\n    </div>\r\n</div>\r\n<div id=\"cart-items\" class=\"cart-items\"></div>\r\n<div id=\"cart-summary\" class=\"cart-footer\">\r\n    <div class=\"text\">\r\n        Кількість товарів: <span class=\"total total-quantity\">0</span>\r\n    </div>\r\n\r\n    <div class=\"text\">\r\n        Загальна сума: <span class=\"total total-sum\">0</span> грн\r\n    </div>\r\n    <% var pageId = $('body').data('page-id'); %>\r\n    <% if(pageId == 'mainPage') { %>\r\n    <a href=\"/order.html\" class=\"btn btn-warning\">Замовити</a>\r\n    <% } else if(pageId == 'orderPage') { %>\r\n    <a href=\"/index.html\" class=\"btn btn-info\">Редагувати</a>\r\n    <% } %>\r\n</div>\r\n");
 exports.filters = ejs.compile("<ul class=\"nav nav-pills\">\r\n    <% filters.forEach(function(filter){ %>\r\n        <li><a data-toggle=\"pill\" href=\"#filter-<%= filter.key %>\"><%= filter.title %></a></li>\r\n    <% }); %>\r\n</ul>");
 
@@ -241,13 +241,14 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
     OrderForm.init();
-    (require('./map')).initMap();
 
+    if (window.google) {
+        (require('./map')).initMap();}
 });
 },{"./OrderForm":1,"./Templates":3,"./map":6,"./pizza/PizzaCart":7,"./pizza/PizzaMenu":8}],6:[function(require,module,exports){
 // https://developers.google.com/maps/documentation/javascript/examples/distance-matrix
 var $input = $('#input-addr');
-var geocoder = new google.maps.Geocoder;
+// var geocoder = new google.maps.Geocoder;
 var map = null;
 var $map = document.getElementById('order-map');
 // var mapNode = document.getElement
@@ -258,6 +259,7 @@ function setAddressCenter(map, address){
     // var _val = $input.val();
     // console.log(_val);
     //
+    var geocoder = new google.maps.Geocoder;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
@@ -273,6 +275,7 @@ function setAddressCenter(map, address){
 }
 
 function geocodeLatLng(latlng, callback){
+    var geocoder = new google.maps.Geocoder;
     geocoder.geocode({'location':latlng}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK && results[1]) {
             var address = results[1].formatted_address;
@@ -352,6 +355,7 @@ function addListener(map, eventName, callback){
 }
 
 function setDestination(address){
+    var geocoder = new google.maps.Geocoder;
     geocoder.geocode({address: address}, function(results, status){
         if (status === 'OK') {
             // map.setCenter(results[0].geometry.location);

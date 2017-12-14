@@ -1,6 +1,6 @@
 // https://developers.google.com/maps/documentation/javascript/examples/distance-matrix
 var $input = $('#input-addr');
-var geocoder = new google.maps.Geocoder;
+// var geocoder = new google.maps.Geocoder;
 var map = null;
 var $map = document.getElementById('order-map');
 // var mapNode = document.getElement
@@ -11,6 +11,7 @@ function setAddressCenter(map, address){
     // var _val = $input.val();
     // console.log(_val);
     //
+    var geocoder = new google.maps.Geocoder;
     geocoder.geocode({'address': address}, function(results, status) {
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
@@ -26,6 +27,7 @@ function setAddressCenter(map, address){
 }
 
 function geocodeLatLng(latlng, callback){
+    var geocoder = new google.maps.Geocoder;
     geocoder.geocode({'location':latlng}, function(results, status) {
         if (status === google.maps.GeocoderStatus.OK && results[1]) {
             var address = results[1].formatted_address;
@@ -105,6 +107,7 @@ function addListener(map, eventName, callback){
 }
 
 function setDestination(address){
+    var geocoder = new google.maps.Geocoder;
     geocoder.geocode({address: address}, function(results, status){
         if (status === 'OK') {
             // map.setCenter(results[0].geometry.location);

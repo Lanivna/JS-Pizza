@@ -9,6 +9,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, .1);
   @cartHeaderHeight: 100px;
   border-left: 1px solid rgba(0, 0, 0, .1);
+  box-shadow: rgba(0,0,0,.2) -3px 3px 10px;
 }
 
     .order {
@@ -42,10 +43,11 @@
       .clean-order-title{
         float: right;
         cursor: pointer;
+        padding-right: 10px;
       }
 
   .cart-footer {
-    height: 100px;
+    height: 130px;
     background: #fff;
     position: absolute;
     bottom: 0;
@@ -56,9 +58,13 @@
   }
 
   .cart-items {
-    overflow: hidden;
-    overflow-y: scroll;
+    //overflow: hidden;
     border-bottom: 1px solid rgba(0,0,0,.1);
+    width: 400px;
+    height: 700px;
+    overflow-x: hidden;
+    overflow-y: auto
+
   }
 
   .pizza-cart-card{
@@ -70,7 +76,9 @@
   .text{
     line-height: 14px;
     font-size: 18px;
-    color: #ec890e;
+    color: #000000;
+    font-weight: 700;
+    margin-bottom: 15px;
   }
 
 

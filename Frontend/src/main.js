@@ -27,6 +27,7 @@ $(function(){
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
     OrderForm.init();
-    (require('./map')).initMap();
 
+    if (window.google) {
+        (require('./map')).initMap();}
 });
